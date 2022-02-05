@@ -1,3 +1,12 @@
-.row{
-    margin:auto;
+body{
+    height:100%;
+    background-color:cadetblue;
+    background: linear-gradient(to right, rgb(124,145,187),rgb(174,201,248),rgb(148,186,252))
+}
+
+.wpBackground{
+    width:100%;
+    height:100vh;
+    min-height:500px;
+    background-image: url(../images/UmbrellaBG.png) no-repeat center center fixed;
 }
