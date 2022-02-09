@@ -85,7 +85,7 @@ function fetchWeather(key, lat, lon){
         var resultsHTML = "";
         var tableHTML = "";
         var weatherDescription = data.current.weather[0].description;
-        //console.log
+        
         console.log(weatherDescription)
         var temperature = data.current.temp;
         var icon = data.current.weather[0].icon;
@@ -94,6 +94,17 @@ function fetchWeather(key, lat, lon){
         var windSpeed = data.current.wind_speed;
         var ts = new Date(data.current.dt * 1000);
         var forecastDate = `${wDay[ts.getDay()]} ${wMonth[ts.getMonth()]} ${ts.getDate()}`
+        console.log(forecastDate)
+        // set values for the current conditions
+        document.getElementById("dayTime").innerHTML = forecastDate;
+        document.getElementById("description").innerHTML = weatherDescription.toUpperCase();
+        document.getElementById("currentTemp").innerHTML = `${Math.round(temperature)}&deg`;
+        document.getElementById("weatherIcon").src = `images/icons/${icon}.png`;
+        document.getElementById("dayTime").innerHTML = forecastDate;
+        document.getElementById("dayTime").innerHTML = forecastDate;
+        document.getElementById("dayTime").innerHTML = forecastDate;
+
+
 
     })
     .catch(err =>{
