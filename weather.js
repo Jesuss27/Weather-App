@@ -119,7 +119,12 @@ function renderHourlyForecast(forecastData){
             var ts = new Date(forecastData[i].dt * 1000)
             // declare variables to use  from forecastData ( hour, temperature, UVI )
             var hour = ts.getHours()
-            var hourString = `${hour}:00 am`;
+            if(hour != 0 ){
+                var hourString = `${hour}:00 am`;
+            }else{
+                var hourString = `12:00 am`
+            }
+            
             if((hour % 12) > 1){
                 hourString = `${hour-12}:00 pm`
             }
