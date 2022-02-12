@@ -5,59 +5,59 @@ body{
     background: linear-gradient(to right, rgb(124,145,187),rgb(174,201,248),rgb(148,186,252))
 }
 :root {
+    /* color-swatches highlight palette*/
+    --dark-green: #39463e;
+    --bright-green:#19C468 ;
+    --light-blue: #E8F3F5;
+    --grey:#D2E4D6 ;
 
-    /* Color Theme Swatches in RGBA */
-    --CFColors-darkGrey-rgba: rgba(33, 33, 33, 1);
-    --CFColors-grayBlue-rgba: rgba(44, 66, 81, .5);
-    --CfColors-darkBlue-rgba: rgba(0, 115, 171, .5);
-    --CFColors-Orange-rgba: rgba(247, 148, 29, .5);
-    --CFColors-ltGrey-rgba: rgba(223, 227, 228, .5);
-    --CFColors-Black-rgba: rgba(0, 0, 0, 1);
+    
 }
 #wpTitle {
     font-family: "Poppins", sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     font-style: normal;
+    letter-spacing: 4px;
     font-size: 1.5em;
-    color: var(--CFColors-darkGrey-rgba);
+    color: white;
     -webkit-text-fill-color: white;
     /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 1.5px;
-    -webkit-text-stroke-color: var(--CFColors-darkGrey-rgba);
+    
 }
 
 
 .wpBackground{
     height:100vh;
     min-height:500px;
-    background: url(images/WeatherPrpBG.png) no-repeat center center fixed;
+    background: var(--dark-green);
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
     background-size:cover;
 }
 #wpMain {
-    color: white;
+    color: black;
     padding: 20px;
     resize: vertical;
 }
 
 #wpCurrent {
-    background-color: var(--CFColors-grayBlue-rgba);
-    color: white;
+    background-color: var(--light-blue);
+    color: black;
     resize: vertical;
 }
 
 #currentTemp {
     font-size: 5em;
-    color: white;
-    -webkit-text-fill-color: white;
+    color: black;
+    -webkit-text-fill-color: black;
     /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: var(--CFColors-darkGrey-rgba);
 }
 #wpConditions {
-    background-color: var(--CFColors-Orange-rgba);
+    background-color: var(--bright-green);
     color: white;
     padding: 20px;
     resize: vertical;
@@ -73,15 +73,15 @@ body{
 }
 #forecastTab li a.active {
     border-bottom-color: transparent;
-    background-color: var(--CFColors-Orange-rgba);
-    color: var(--CFColors-darkGrey-rgba);
+    background-color: var(--bright-green);
+    color: white;
     font-weight: bold;
 }
 
 #forecastTab li a {
     border-bottom-color: transparent;
     /*background-color: var(--CFColors-ltGrey-rgba);*/
-    color: white;
+    color: black;
     font-weight: 400;
 }
 
@@ -93,4 +93,10 @@ body{
 #wpFooter div a {
     font-size: 1em;
     color: var(--CFColors-darkGrey-rgba);
+}
+
+#weatherContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }

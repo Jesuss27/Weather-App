@@ -21,15 +21,11 @@ const iconValue = {
 
 // find the latitude and longitude of the user's location
 function initGeoLocation(){
-    console.log(googleApiKey)
-
-
     // use `built-in` browser tool "naviagtor" to locate the lat and long of the user
 
     if(navigator.geolocation){
 
         // use a success and fail callback function
-        console.log(navigator.geolocation)
         navigator.geolocation.getCurrentPosition(success,fail)
         
     }else{
@@ -61,7 +57,6 @@ function fetchLocation(key, latitude, longitude){
     })
     .then(data => {
         //work  with data
-        console.log(data)
         document.getElementById("location").innerHTML = data.results[5].formatted_address;
     })
     .catch( err => {
@@ -79,14 +74,11 @@ function fetchWeather(key, lat, lon){
         return response.json()
     })
     .then(data => {
-        console.log(data)
         //work with openWeather data
             // all CURRENT weather data
         var resultsHTML = "";
         var tableHTML = "";
         var weatherDescription = data.current.weather[0].description;
-        
-        console.log(weatherDescription)
         var temperature = data.current.temp;
         var icon = data.current.weather[0].icon;
         var uvi = data.current.uvi;
@@ -94,19 +86,22 @@ function fetchWeather(key, lat, lon){
         var windSpeed = data.current.wind_speed;
         var ts = new Date(data.current.dt * 1000);
         var forecastDate = `${wDay[ts.getDay()]} ${wMonth[ts.getMonth()]} ${ts.getDate()}`
-        console.log(forecastDate)
+
         // set values for the current conditions
         document.getElementById("dayTime").innerHTML = forecastDate;
         document.getElementById("description").innerHTML = weatherDescription.toUpperCase();
         document.getElementById("currentTemp").innerHTML = `${Math.round(temperature)}&deg`;
         document.getElementById("weatherIcon").src = `images/icons/${icon}.png`;
-        document.getElementById("dayTime").innerHTML = forecastDate;
-        document.getElementById("dayTime").innerHTML = forecastDate;
-        document.getElementById("dayTime").innerHTML = forecastDate;
+        document.getElementById("uvi").innerHTML =  `UV Index: ${uvi}`;
+        document.getElementById("humidity").innerHTML = `Humidity: ${humidity}%`;
+        document.getElementById("wind").innerHTML = `Wind: ${Math.round(windSpeed)} mph`;
 
-
+        // render the forecast tabs
+        document.getElementById("hourlyForecast").innerHTML = renderHourlyForecast(data.hourly)
+        document.getElementById("dailyForecast").innerHTML = renderDailyForecast(data.daily)
 
     })
+
     .catch(err =>{
         throw(`Sorry, an error ocurred. ${err}`);
     })
@@ -114,3 +109,54 @@ function fetchWeather(key, lat, lon){
 
     }
     
+    //render hourly forecast
+function renderHourlyForecast(forecastData){
+        var tableHTML = '<tr><th>Hour</th><th>Temperature</th><th>UVI</th></tr>'
+        console.log(forecastData)
+        for(let i = 0; i < 8;i++){
+            //dislpay the time, temperature and UVI
+                // get the timestamp from the unix provided
+            var ts = new Date(forecastData[i].dt * 1000)
+            // declare variables to use  from forecastData ( hour, temperature, UVI )
+            var hour = ts.getHours()
+            var hourString = `${hour}:00 am`;
+            if((hour % 12) > 1){
+                hourString = `${hour-12}:00 pm`
+            }
+            var temperature = forecastData[i].temp;
+            var uvi = forecastData[i].uvi;
+            //add row to tableHTML
+            tableHTML += renderHourlyRow(hourString,temperature,uvi)
+        }
+        return tableHTML;
+}
+
+    //render daily forecast
+function renderDailyForecast(forecastData){
+    console.log(forecastData)
+    var tableHTML = `<tr><th>Date</th><th>Hi</th><th>Low</th><th>Description</th></tr>`
+    for(let i = 0 ; i < 8 ; i++){
+        // extract date, hi and low temp, description
+            //extract ts from forecastData
+        var ts = new Date(forecastData[i].dt * 1000)
+        
+        var date = `${wMonth[ts.getMonth()]} ${ts.getDate()}` 
+        var hi = forecastData[i].temp.max
+        var low = forecastData[i].temp.min
+        var description = forecastData[i].weather[0].main
+        
+        tableHTML += renderDailyRow(date,hi,low,description)
+    }
+    return tableHTML
+}
+
+
+
+
+function renderHourlyRow(a,b,c){
+    return `<tr><td>${a}</td><td>${b}</td><td>${c}</td></tr>`
+}
+
+function renderDailyRow(date,hi,low,desc){
+    return `<tr><td>${date}</td><td>${Math.round(hi)}</td><td>${Math.round(low)}</td><td>${desc}</td></tr>`
+}
