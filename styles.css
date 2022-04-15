@@ -6,8 +6,8 @@ body{
 }
 :root {
     /* color-swatches highlight palette*/
-    --dark-green: #39463e;
-    --bright-green:#19C468 ;
+    --dark-green: #555555;
+    --bright-green:#c1ffde ;
     --light-blue: #E8F3F5;
     --grey:#D2E4D6 ;
 
@@ -58,7 +58,7 @@ body{
 }
 #wpConditions {
     background-color: var(--bright-green);
-    color: white;
+    color: black;
     padding: 20px;
     resize: vertical;
 
@@ -74,7 +74,7 @@ body{
 #forecastTab li a.active {
     border-bottom-color: transparent;
     background-color: var(--bright-green);
-    color: white;
+    color: black;
     font-weight: bold;
 }
 
