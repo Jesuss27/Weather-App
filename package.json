@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "engines":{
-    "npm":"6.x"
+    "npm":"6.x",
+    "node":"16.x"
   },
   "main": "keys.js",
   "scripts": {
